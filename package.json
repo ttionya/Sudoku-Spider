@@ -1,0 +1,23 @@
+{
+  "name": "sudoku-spider",
+  "version": "1.0.0",
+  "description": "抓取欧泊颗（www.oubk.com）数独的爬虫",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "oubk.com",
+    "sudoku"
+  ],
+  "author": "ttionya",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.1.0",
+    "babel-cli": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.2.0",
+    "cheerio": "^0.22.0",
+    "superagent": "^3.5.0"
+  }
+}
