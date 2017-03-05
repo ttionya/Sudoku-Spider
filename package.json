@@ -4,6 +4,7 @@
   "description": "抓取欧泊颗（www.oubk.com）数独的爬虫",
   "main": "index.js",
   "scripts": {
+    "run": "babel-node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
