@@ -19,6 +19,8 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.2.0",
     "cheerio": "^0.22.0",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.0",
     "superagent": "^3.5.0"
   }
 }
