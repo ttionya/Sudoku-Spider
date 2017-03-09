@@ -21,4 +21,6 @@ export default {
             socketPath: '/tmp/mysql.sock'
         }
     },
+
+    rules: [1]
 }
