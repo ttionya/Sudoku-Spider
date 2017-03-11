@@ -7,27 +7,28 @@ import config from './config';
 
 let fetchWeb = async () => {
     await db.initDB();
-    console.log(chalk.green('数据库建立完成\n'));
+    console.log(chalk.green('\n数据库建立完成\n'));
 
 
     const rules = config.rules; // 规则数组
 
     for (let index of rules) {
         let lastIndex = index + config.maxPerSudokuId,
-            array = [];
+            array = [],
+            maxSId;
 
         // 先判断数据库中有多少数据，从最后一个 Id 开始请求，以避免多余请求
-        index = await db.queryData(index, lastIndex); // 覆盖原先数字
-        console.log(index)
+        maxSId = await db.queryData(index, lastIndex);
+        index = maxSId || (index - 1); // NaN 赋值 index - 1
 
         for (let i = index + 1; i < lastIndex; i++) {
             array.push(i);
         }
 
-        // await fetch(array);
+        await fetch(array);
     }
 };
 
 fetchWeb()
-    .then(() => console.log('Success!'))
-    .catch(err => console.error(err.message));
+    .then(() => console.log(chalk.green('\n爬虫运行完毕')))
+    .catch(err => console.error(chalk.red('\n爬虫停止运行，错误原因：\n' + err.message)));
