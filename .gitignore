@@ -32,3 +32,4 @@ jspm_packages
 
 # 开发中不提交编译后的文件
 dist
+images
