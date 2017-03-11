@@ -11,6 +11,7 @@ let fetchWeb = async () => {
 
 
     const rules = config.rules; // 规则数组
+    let finFailArray = []; // 重试一次依旧失败的 id 的数组
 
     for (let index of rules) {
         let lastIndex = index + config.maxPerSudokuId,
@@ -25,8 +26,23 @@ let fetchWeb = async () => {
             array.push(i);
         }
 
-        await fetch(array);
+        let failArray = await fetch(array);
+
+        // 只重试一次
+        if (failArray.length) {
+            console.log(chalk.yellow('\n开始重试请求失败的 id：' + failArray.join() + '\n'));
+            finFailArray.push(await fetch(failArray));
+        }
     }
+
+
+    // 扁平化数组
+    // finFailArray = finFailArray.reduce(function(a, b) {
+    //     return a.concat(b);
+    // });
+
+    // 保存失败数据到文件，以便手动重试
+
 };
 
 fetchWeb()

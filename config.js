@@ -23,13 +23,13 @@ export default {
 
         // 强制重建数据库
         // 注意：会删除所有数据
-        forceCreate: false
+        forceCreate: true
     },
 
 
     // 对应数独见 ABOUT.md
     rules: [
-        1111111,          // 数独、对角线数独
+        1,          // 数独、对角线数独
         5000001,    // 杀手数独、杀手对角数独
         10000001,   // 数比数独、数比对角数独
         15000001,   // 窗口数独
@@ -44,11 +44,11 @@ export default {
     // 每种数独最大 Id
     // 只会探查 i ~ i + maxPerSudokuId 范围内的数独
     // 建议 100w 即可
-    maxPerSudokuId: 14,
+    maxPerSudokuId: 20,
 
     // 连续未探查到多少数独则切换到下一个数独种类
     // 不宜过大，否则会有很多无用请求
-    emptyCountToNext: 2,
+    notSudokuLimitCount: 100,
 
     // 并发数，过高会被当作攻击，建议 20 - 30
     limit: 5,
