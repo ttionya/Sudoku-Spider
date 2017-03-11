@@ -4,8 +4,10 @@
   "description": "抓取欧泊颗（www.oubk.com）数独的爬虫",
   "main": "index.js",
   "scripts": {
-    "run": "babel-node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "babel-node index.js",
+    "build": "babel lib -d ./dist/lib && babel index.js -o ./dist/index.js && babel config.js -o ./dist/config.js",
+    "clear": "rm -rf ./dist",
+    "start": "npm run clear && npm run build && node ./dist/index.js"
   },
   "keywords": [
     "oubk.com",
@@ -18,6 +20,7 @@
     "babel-cli": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.2.0",
+    "chalk": "^1.1.0",
     "cheerio": "^0.22.0",
     "mysql": "^2.13.0",
     "sequelize": "^3.30.0",
