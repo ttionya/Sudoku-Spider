@@ -17,13 +17,14 @@ let fetchWeb = async () => {
             array = [];
 
         // 先判断数据库中有多少数据，从最后一个 Id 开始请求，以避免多余请求
+        index = await db.queryData(index, lastIndex); // 覆盖原先数字
+        console.log(index)
 
-
-        for (let i = index; i < lastIndex; i++) {
+        for (let i = index + 1; i < lastIndex; i++) {
             array.push(i);
         }
 
-        await fetch(array);
+        // await fetch(array);
     }
 };
 
