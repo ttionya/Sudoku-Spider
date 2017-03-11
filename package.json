@@ -4,7 +4,7 @@
   "description": "抓取欧泊颗（www.oubk.com）数独的爬虫",
   "main": "index.js",
   "scripts": {
-    "dev": "babel-node index.js",
+    "dev": "babel-node --expose-gc index.js",
     "build": "babel lib -d ./dist/lib && babel index.js -o ./dist/index.js && babel config.js -o ./dist/config.js",
     "clear": "rm -rf ./dist",
     "start": "npm run clear && npm run build && node ./dist/index.js"

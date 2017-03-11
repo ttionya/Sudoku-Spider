@@ -29,4 +29,4 @@
 | level          | Unsigned Tinyint | 1-5        |             | 
 | type_name      | varchar(20)      | 中文字     |             |
 
-InnoDB
+使用 InnoDB 数据库引擎

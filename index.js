@@ -9,14 +9,22 @@ let fetchWeb = async () => {
     await db.initDB();
     console.log(chalk.green('数据库建立完成\n'));
 
-    let arr = [];
-    for (let i = 1; i <= 100; i++) {
-        arr.push(i)
+
+    const rules = config.rules; // 规则数组
+
+    for (let index of rules) {
+        let lastIndex = index + config.maxPerSudokuId,
+            array = [];
+
+        // 先判断数据库中有多少数据，从最后一个 Id 开始请求，以避免多余请求
+
+
+        for (let i = index; i < lastIndex; i++) {
+            array.push(i);
+        }
+
+        await fetch(array);
     }
-
-    let array = [1000000, 1000001, 1000002, 1000003, 1000004, 1000005, 1000006];
-    await fetch(array);
-
 };
 
 fetchWeb()
