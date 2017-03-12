@@ -10,8 +10,8 @@ export default {
         host: 'localhost',
         port: 3306,
         database: 'sudoku',
-        username: 'root',
-        password: 'ttionya',
+        username: '',
+        password: '',
 
         /*
          * 此为 mysqlijs/mysql 的原生属性
@@ -20,12 +20,12 @@ export default {
          * 设置 socketPath 后，host 和 port 字段都将无效
          */
         dialectOptions: {
-            socketPath: '/tmp/mysql.sock'
+            socketPath: ''
         },
 
         // 强制重建数据库
         // 注意：会删除所有数据
-        forceCreate: true
+        forceCreate: false
     },
 
 
@@ -46,14 +46,14 @@ export default {
     // 每种数独最大 Id
     // 只会探查 i ~ i + maxPerSudokuId 范围内的数独
     // 建议 100w 即可
-    maxPerSudokuId: 5,
+    maxPerSudokuId: 1000000,
 
     // 连续未探查到多少数独则切换到下一个数独种类
     // 不宜过大，否则会有很多无用请求
-    notSudokuLimitCount: 100,
+    notSudokuLimitCount: 200,
 
     // 并发数，过高会被当作攻击，建议 20 - 30
-    limit: 5,
+    limit: 20,
 
 
     // 打印执行的 SQL 语句
