@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "babel-node --expose-gc index.js",
     "build": "babel lib -d ./dist/lib && babel index.js -o ./dist/index.js && babel config.js -o ./dist/config.js",
-    "clear": "rm -rf ./dist",
+    "clear": "rm -rf ./dist ./images",
     "start": "npm run clear && npm run build && node ./dist/index.js"
   },
   "keywords": [

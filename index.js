@@ -1,14 +1,15 @@
 import "babel-polyfill";
-import fs from 'fs';
-import * as logInfo from './lib/functions/getLogInformation';
+import * as logs from './lib/functions/logs';
 import * as db from  './lib/database';
 import fetch from './lib/fetch';
 import config from './config';
 
 
 let fetchWeb = async () => {
+
+    // 初始化数据库
     await db.initDB();
-    console.log(logInfo.normalGMessage('\n数据库初始化完成\n'));
+    console.log(logs.gMessage('\n数据库初始化完成\n'));
 
 
     const rules = config.rules; // 规则数组
@@ -20,7 +21,7 @@ let fetchWeb = async () => {
             maxSId;
 
         // 先判断数据库中有多少数据，从最后一个 Id 开始请求，以避免多余请求
-        maxSId = await db.queryData(index, lastIndex);
+        maxSId = await db.queryMax(index, lastIndex);
         index = maxSId || (index - 1); // NaN 赋值 index - 1
 
         for (let i = index + 1; i < lastIndex; i++) {
@@ -34,14 +35,10 @@ let fetchWeb = async () => {
         if (failArray.length) {
 
             // 输出日志
-            config.log && console.log(logInfo.memoryUsage()
-                + ' '
-                + logInfo.concurrencyCount('-')
-                + ' '
-                + logInfo.normalYMessage('[失败重试]')
-                + ' '
-                + logInfo.normalYMessage('(' + failArray.join() + ')')
-            );
+            config.log && logs.formatMessage({
+                warn: '失败重试',
+                id: failArray.join()
+            });
 
             finFailArray.push(await fetch(failArray));
         }
@@ -57,17 +54,13 @@ let fetchWeb = async () => {
         });
 
         // 输出日志
-        console.log(logInfo.memoryUsage()
-            + ' '
-            + logInfo.concurrencyCount('-')
-            + ' '
-            + logInfo.normalYMessage('[错误列表]')
-            + ' '
-            + logInfo.normalMessage('(' + finFailArray.join() + ')')
-        );
+        logs.formatMessage({
+            warn: '错误列表',
+            id: finFailArray.join()
+        });
     }
 };
 
 fetchWeb()
-    .then(() => console.log(logInfo.normalGMessage('\n爬虫运行结束')))
-    .catch(err => console.error(logInfo.errorMessage('\n爬虫停止运行，错误原因：\n' + err.message)));
+    .then(() => console.log(logs.gMessage(('\n爬虫运行结束'))))
+    .catch(err => console.error(logs.rMessage('\n爬虫停止运行，错误原因：\n' + err.message)));
