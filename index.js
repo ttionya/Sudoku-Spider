@@ -1,5 +1,5 @@
 import "babel-polyfill";
-import chalk from 'chalk';
+import * as logInfo from './lib/functions/getLogInformation';
 import * as db from  './lib/database';
 import fetch from './lib/fetch';
 import config from './config';
@@ -7,7 +7,7 @@ import config from './config';
 
 let fetchWeb = async () => {
     await db.initDB();
-    console.log(chalk.green('\n数据库初始化完成\n'));
+    console.log(logInfo.normalGMessage('\n数据库初始化完成\n'));
 
 
     const rules = config.rules; // 规则数组
@@ -31,7 +31,17 @@ let fetchWeb = async () => {
 
         // 只重试一次
         if (failArray.length) {
-            console.log(chalk.yellow('\n开始重试请求失败的 id：' + failArray.join() + '\n'));
+
+            // 输出日志
+            config.log && console.log(logInfo.memoryUsage()
+                + ' '
+                + logInfo.concurrencyCount('-')
+                + ' '
+                + logInfo.normalYMessage('[失败重试]')
+                + ' '
+                + logInfo.normalYMessage('(' + failArray.join() + ')')
+            );
+
             finFailArray.push(await fetch(failArray));
         }
     }
@@ -47,5 +57,5 @@ let fetchWeb = async () => {
 };
 
 fetchWeb()
-    .then(() => console.log(chalk.green('\n爬虫运行结束')))
-    .catch(err => console.error(chalk.red('\n爬虫停止运行，错误原因：\n' + err.message)));
+    .then(() => console.log(logInfo.normalGMessage('\n爬虫运行结束')))
+    .catch(err => console.error(logInfo.errorMessage('\n爬虫停止运行，错误原因：\n' + err.message)));
