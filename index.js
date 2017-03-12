@@ -1,4 +1,5 @@
 import "babel-polyfill";
+import fs from 'fs';
 import * as logInfo from './lib/functions/getLogInformation';
 import * as db from  './lib/database';
 import fetch from './lib/fetch';
@@ -47,13 +48,24 @@ let fetchWeb = async () => {
     }
 
 
-    // 扁平化数组
-    // finFailArray = finFailArray.reduce(function(a, b) {
-    //     return a.concat(b);
-    // });
+    // 输出失败数据，以便手动重试
+    if (finFailArray.length) {
 
-    // 保存失败数据到文件，以便手动重试
+        // 扁平化数组
+        finFailArray = finFailArray.reduce(function(a, b) {
+            return a.concat(b);
+        });
 
+        // 输出日志
+        console.log(logInfo.memoryUsage()
+            + ' '
+            + logInfo.concurrencyCount('-')
+            + ' '
+            + logInfo.normalYMessage('[错误列表]')
+            + ' '
+            + logInfo.normalMessage('(' + finFailArray.join() + ')')
+        );
+    }
 };
 
 fetchWeb()

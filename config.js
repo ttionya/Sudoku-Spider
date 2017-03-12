@@ -25,7 +25,7 @@ export default {
 
         // 强制重建数据库
         // 注意：会删除所有数据
-        forceCreate: true
+        forceCreate: false
     },
 
 
