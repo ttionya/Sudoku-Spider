@@ -46,7 +46,7 @@ export default {
     // 每种数独最大 Id
     // 只会探查 i ~ i + maxPerSudokuId 范围内的数独
     // 建议 100w 即可
-    maxPerSudokuId: 10,
+    maxPerSudokuId: 5,
 
     // 连续未探查到多少数独则切换到下一个数独种类
     // 不宜过大，否则会有很多无用请求

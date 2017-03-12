@@ -18,15 +18,15 @@
 
 #### MySQL
 
-| 字段名         | 数据类型         | 备注       | 索引        |
-| :---:          | :---:            | :---:      | :---:       |
-| id             | varchar(10)      | 自增主键   | PRIMARY     |
-| sid            | varchar(10)      | 爬到的Id   | UNIQUE      |
-| question       | char(81)         |            |             |
-| answer         | char(81)         |            |             |
-| background_url | varchar(15)      | 以Id命名   |             |
-| other_data     | text             | JSON格式   |             |
-| level          | Unsigned Tinyint | 1-5        |             | 
-| type_name      | varchar(20)      | 中文字     |             |
+| 字段名          | 数据类型         | 备注       | 索引        |
+| :---:           | :---:            | :---:      | :---:       |
+| id              | unsigned int     | 自增主键   | PRIMARY     |
+| sid             | unsigned int     | 爬到的Id   | UNIQUE      |
+| question        | char(81)         |            |             |
+| answer          | char(81)         |            |             |
+| background_name | varchar(15)      | 以Id命名   |             |
+| other_data      | text             | JSON格式   |             |
+| level           | unsigned tinyint | 1-5        |             | 
+| type_name       | varchar(20)      | 中文字     |             |
 
 使用 InnoDB 数据库引擎
