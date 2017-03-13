@@ -19,9 +19,9 @@ export default {
          * 此时可以设置 socketPath: 'sock file path'
          * 设置 socketPath 后，host 和 port 字段都将无效
          */
-        dialectOptions: {
-            socketPath: ''
-        },
+        // dialectOptions: {
+        //     socketPath: '/tmp/mysql.sock'
+        // },
 
         // 强制重建数据库
         // 注意：会删除所有数据
@@ -53,7 +53,7 @@ export default {
     notSudokuLimitCount: 200,
 
     // 并发数，过高会被当作攻击，建议 20 - 30
-    limit: 20,
+    limit: 30,
 
 
     // 打印执行的 SQL 语句

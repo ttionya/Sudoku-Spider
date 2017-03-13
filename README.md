@@ -19,17 +19,18 @@
 
 1. 安装依赖 `npm i`
 
-2. 修改配置文件 `config.js`
+2. 修改配置文件 `config.js`，配置选项见[配置](#配置)
 
-3. 开始爬取 `npm run start`
+3. 运行爬虫 `npm run start`
 
-4. 清理文件夹，包括爬取的图片和生成的运行文件 `npm run clear`。**注意：会删除爬取的图片**
+4. 清理文件夹，包括爬取的图片和生成的运行文件 `npm run clear`。**注意：会删除已爬取的图片**
 
 
 ## 说明
 
 + 只支持 MySQL 数据库
 + 未对 Windows 环境进行测试，理论上可以
++ 不会爬取 2x3 数独
 
 ## 配置
 
@@ -48,7 +49,7 @@
 + `rules`：爬取的数组，详见配置文件
 + `maxPerSudokuId`：爬虫只会爬取 `i ~ i + maxPerSudokuId` 范围内的数独，默认 `1,000,000`
 + `notSudokuLimitCount`：爬取到的页面连续多少个就终止爬取该类型，而切换到下一类型，默认 `200`
-+ `limit`：爬虫的并发数，不宜太高，容易被当作攻击，建议 30 以内
++ `limit`：爬虫的并发数，不宜太高，容易被当作攻击，建议 30 以内，默认为 `30`
 + `SQLLog`：开启 [`Sequelize.js`](https://github.com/sequelize/sequelize) 打印执行的 SQL 语句。开启会降低性能
 + `log`：打印日志，开启会降低性能
 

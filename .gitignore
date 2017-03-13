@@ -30,6 +30,9 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-# 开发中不提交编译后的文件
+# Ignore folder created by command
 dist
 images
+
+# Ignore backup
+backup
