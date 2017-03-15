@@ -63,5 +63,10 @@ export default {
     // 打印日志
     // 包含当前请求数、当前数独信息、内存使用情况
     // 注意：开启会影响性能
-    log: true
+    log: true,
+
+    // 日志等级
+    // 输出此等级以上的日志到文件中
+    // 等级依次为 INFO, SUCCESS, WARN, ERROR，对应基本信息、成功、警告、错误，注意大写
+    logLevel: 'WARN'
 }

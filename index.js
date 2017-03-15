@@ -5,11 +5,38 @@ import fetch from './lib/fetch';
 import config from './config';
 
 
+const startTime = Date.now();
+
+const getTimeDiff = () => {
+    let seconds = Math.floor((Date.now() - startTime) / 1000), // 秒
+        minutes = Math.floor(seconds / 60), // 分
+        hours = Math.floor(minutes / 60), // 小时
+        time = '';
+
+    time += hours ? hours.toString() + ' 小时 ' : '';
+    minutes = minutes - 60 * hours;
+    time += minutes ? minutes.toString() + ' 分 ' : '';
+    seconds = seconds - 60 * hours - 60 * minutes + 1;
+    time += seconds.toString() + ' 秒';
+
+    return time;
+};
+
+
 let fetchWeb = async () => {
+    logs.formatMessage({
+        type: 'WARN',
+        action: '开始运行',
+        show: true
+    });
 
     // 初始化数据库
     await db.initDB();
-    console.log(logs.gMessage('\n数据库初始化完成\n'));
+    logs.formatMessage({
+        type: 'WARN',
+        action: '数据库初始化完成',
+        show: true
+    });
 
 
     const rules = config.rules; // 规则数组
@@ -36,8 +63,9 @@ let fetchWeb = async () => {
 
             // 输出日志
             config.log && logs.formatMessage({
-                warn: '失败重试',
-                id: failArray.join()
+                type: 'WARN',
+                action: '失败重试',
+                sId: failArray.join()
             });
 
             finFailArray.push(await fetch(failArray));
@@ -55,12 +83,32 @@ let fetchWeb = async () => {
 
         // 输出日志
         logs.formatMessage({
-            warn: '错误列表',
-            id: finFailArray.join()
+            type: 'ERROR',
+            action: '错误列表',
+            sId: finFailArray.join()
         });
     }
 };
 
 fetchWeb()
-    .then(() => console.log(logs.gMessage(('\n爬虫运行结束'))))
-    .catch(err => console.error(logs.rMessage('\n爬虫停止运行，错误原因：\n' + err.message)));
+    .then(() => {
+
+        // 输出日志
+        logs.formatMessage({
+            type: 'SUCCESS',
+            action: '运行完成',
+            message: '共耗时 ' + getTimeDiff(),
+            show: true
+        });
+
+    })
+    .catch(err => {
+
+        // 输出错误信息日志
+        logs.formatMessage({
+            type: 'ERROR',
+            action: '爬虫停止运行',
+            message: '共耗时 ' + getTimeDiff(),
+            errorMessage: err.message
+        });
+    });

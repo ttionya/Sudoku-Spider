@@ -52,6 +52,7 @@
 + `limit`：爬虫的并发数，不宜太高，容易被当作攻击，建议 30 以内，默认为 `30`
 + `SQLLog`：开启 [`Sequelize.js`](https://github.com/sequelize/sequelize) 打印执行的 SQL 语句。开启会降低性能
 + `log`：打印日志，开启会降低性能
++ `logLevel`：日志等级，等级从低到高分别是 `INFO`，`SUCCESS`，`WARN`，`ERROR`，注意全大写
 
 
 ## License
